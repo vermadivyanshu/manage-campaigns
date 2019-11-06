@@ -1,3 +1,3 @@
 module.exports = {
-  'extends': null
+  lintOnSave: false
 }
