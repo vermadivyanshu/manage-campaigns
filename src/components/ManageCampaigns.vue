@@ -1,19 +1,19 @@
 <template lang="pug">
   .manage-campaigns
-    h1.manage-campaigns-heading Manage Campaigns
+    h1.manage-campaigns-heading.mb-3 {{ $t('manageCampaignsHeading')}}
     v-tabs(v-model="tab" color="#83a515")
       v-tab(href="#tab-1")
-        span Upcoming Campaigns
+        span {{ $t('tabs.upcomingCampaigns')}}
       v-tab(href="#tab-2")
-        span Live Campaigns
+        span {{ $t('tabs.liveCampaigns')}}
       v-tab(href="#tab-3")
-        span Past Campaigns
+        span {{ $t('tabs.pastCampaigns')}}
     v-tabs-items(v-model="tab")
-      v-tab-item.py-4.px-2(key="1" value="tab-1")
+      v-tab-item.py-4.px-4(key="1" value="tab-1")
         campaign-table(:campaignsList="upcoming" @open-view-pricing="viewPricingModal")
-      v-tab-item.py-4.px-2(key="2" value="tab-2")
+      v-tab-item.py-4.px-4(key="2" value="tab-2")
         campaign-table(:campaignsList="live" @open-view-pricing="viewPricingModal")
-      v-tab-item.py-4.px-2(key="3" value="tab-3")
+      v-tab-item.py-4.px-4(key="3" value="tab-3")
         campaign-table(:campaignsList="past" @open-view-pricing="viewPricingModal" @update-campaign-date-for-record="updateDateForCampaign")
     campaign-modal(:campaign="campaignForModal" :isOpen="isOpenPricingModal"
     @close-campaign-modal="closePricingModal")

@@ -4,10 +4,10 @@
       template(slot="default")
         thead
           tr
-            th(class="text-left") DATE
-            th(class="text-left") CAMPAIGN
-            th(class="text-left") VIEW
-            th(class="text-left") ACTIONS
+            th(class="text-left") {{ $t('table.date')}}
+            th(class="text-left") {{ $t('table.campaign')}}
+            th(class="text-left") {{ $t('table.view')}}
+            th(class="text-left") {{ $t('table.actions') }}
         tbody
           campaign-table-row.pa-3(v-for="campaign, index in campaignsList"
           :campaignRow="campaign"
@@ -17,7 +17,7 @@
     campaign-date-picker(
       :isOpen="isCampaignDatePickerOpen"
       :campaign="campaignDatePickerItem"
-      @close-campaign-date-picker="closeCampaignDatePicker"
+      @close-date-pciker="closeCampaignDatePicker"
       @update:campaign-date="updateCampaignDate"
     )
 </template>
@@ -35,12 +35,10 @@ export default {
   components: { CampaignTableRow, CampaignDatePicker }
   methods:
     scheduleAgain: (campaign) ->
-      console.log "emit2"
       @campaignDatePickerItem = campaign
       @isCampaignDatePickerOpen = true
 
     updateCampaignDate: (date) ->
-      console.log(date)
       @$emit('update-campaign-date-for-record', date, @campaignDatePickerItem)
       @isCampaignDatePickerOpen = false
 

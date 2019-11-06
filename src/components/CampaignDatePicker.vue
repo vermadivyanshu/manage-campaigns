@@ -1,9 +1,9 @@
 <template lang="pug">
   v-dialog(persistent v-model="isOpen")
-    v-date-picker(v-model="datePickerModel" scrollable)
+    v-date-picker(v-model="datePickerModel" scrollable :locale="$i18n.locale")
       v-spacer
-      v-btn(text @click="closeDatePicker") Cancel
-      v-btn(text @click="updateDateAndCloseDatePicker") Ok
+      v-btn(text @click="closeDatePicker") {{ $t('labels.cancel')}}
+      v-btn(text @click="updateDateAndCloseDatePicker") {{ $t('labels.okay')}}
 </template>
 
 <script lang="coffee">
