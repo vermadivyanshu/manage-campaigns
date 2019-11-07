@@ -2,10 +2,10 @@
   v-dialog(persistent v-model="isOpen" :width="dialogWidth" v-if="campaign")
     v-card.pa-3
       v-row(no-gutters no-wrap justify="space-between")
-        v-flex(xs6 md3 lg3)
+        v-flex(xs5 md3 lg3)
           v-card(height="160" width="160" raised)
             v-img#campaign-image( v-if="img" :src="require(`../assets/${img}`)" height="160" width="160")
-        v-flex(xs6 md9 lg9)
+        v-flex(xs7 md9 lg9)
           v-col#image-text(no-wrap align="start" justify="end")
             div.main-text.font-weight-medium.text-truncate {{ campaign.name }}
             div.sub-text.text-truncate {{ campaign.region }}
@@ -29,7 +29,7 @@
           span.price-text.font-weight-medium {{ yearlyPrice }}
       v-row(no-gutters no-wrap justify="center" align="center")
         v-flex.pt-3(xs6 md4 lg4 text-center)
-          v-btn(@click="closeDialog" medium text outlined) {{ $t('labels.close') }}
+          v-btn.close-button(@click="closeDialog" medium text outlined) {{ $t('labels.close') }}
 </template>
 
 <script lang="coffee">
@@ -78,4 +78,6 @@ export default {
 #image-text
   position: relative
   top: 6.5rem
+.close-button
+  border-color: #181b31 !important
 </style>

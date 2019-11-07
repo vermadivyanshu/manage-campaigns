@@ -10,11 +10,11 @@
         span {{ $t('tabs.pastCampaigns')}}
     v-tabs-items(v-model="tab")
       v-tab-item.py-4.px-4(key="1" value="tab-1")
-        campaign-table(:campaignsList="upcoming" @open-view-pricing="viewPricingModal" @schedule-again-for-campaign="rescheduleForCampaign")
+        campaign-table#upcoming-campaigns-table(:campaignsList="upcoming" @open-view-pricing="viewPricingModal" @schedule-again-for-campaign="rescheduleForCampaign")
       v-tab-item.py-4.px-4(key="2" value="tab-2")
-        campaign-table(:campaignsList="live" @open-view-pricing="viewPricingModal" @schedule-again-for-campaign="rescheduleForCampaign")
+        campaign-table#live-campaigns-table(:campaignsList="live" @open-view-pricing="viewPricingModal" @schedule-again-for-campaign="rescheduleForCampaign")
       v-tab-item.py-4.px-4(key="3" value="tab-3")
-        campaign-table(:campaignsList="past" @open-view-pricing="viewPricingModal" @schedule-again-for-campaign="rescheduleForCampaign")
+        campaign-table#past-campaigns-table(:campaignsList="past" @open-view-pricing="viewPricingModal" @schedule-again-for-campaign="rescheduleForCampaign")
     campaign-modal(:campaign="campaignForModal" :isOpen="isOpenPricingModal"
     @close-campaign-modal="closePricingModal")
     campaign-date-picker(

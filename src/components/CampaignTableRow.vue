@@ -1,45 +1,45 @@
 <template lang="pug">
   tr.campaign-row
-    td
+    td.date-col
       v-col.px-0#campaign-date(not-gutters)
         div.main-text.text-truncate {{ formattedCampaignDate }}
         div.sub-text.text-truncate {{ campaignDateDiff }}
-    td
+    td.campaign-col
       v-row(no-gutters no-wrap justify="space-between" align="center")
-        v-flex(xs3 md3 lg2)
+        v-flex(xs6 md3 lg2)
           v-img( :src="require(`../assets/${campaignRow.img}`)" height="40" width="40")
-        v-flex(xs9 md9 lg10)
+        v-flex(xs6 md9 lg10)
           v-col.px-0#image-text(no-gutters no-wrap align="start")
-            v-flex(xs6)
+            v-flex(xs12)
               div.main-text.text-truncate {{campaignRow.name}}
-            v-flex(xs6)
-              div.sub-text.caption {{ campaignRow.region}}
-    td
+            v-flex(xs12)
+              div.sub-text.caption.text-truncate {{ campaignRow.region}}
+    td.campaign-view-col
       v-row(no-gutters no-wrap justify="space-between" align="center" @click="viewPricing")
-        v-flex(xs3 md3 lg2)
+        v-flex(xs12 md3 lg2)
           v-img(src="../assets/Price.png" height="20" width="20")
-        v-flex(xs9 md9 lg10)
-          span.sub-text {{ $t('table.viewPricing') }}
-    td
+        v-flex(xs12 md9 lg10)
+          span.sub-text.text-truncate {{ $t('table.viewPricing') }}
+    td.actions-col
       v-row(no-gutters no-wrap justify="space-between" align="center")
         v-flex(xs3)
           v-row(no-gutters justify="space-between" align="center")
-            v-flex(xs3 md3 lg3)
+            v-flex(xs12 md3 lg3)
               v-img( src="../assets/file.png" height="20" width="15")
-            v-flex(xs9 md9 lg9)
-              span.sub-text CSV
+            v-flex(xs12 md9 lg9)
+              span.sub-text.truncated-text-icons CSV
         v-flex(xs3)
           v-row( no-gutters no-wrap justify="space-between" align="center")
-            v-flex(xs3 md3 lg3)
+            v-flex(xs12 md3 lg3)
               v-img( src="../assets/statistics-report.png" height="20" width="15")
-            v-flex(xs9 md9 lg9)
-              span.sub-text.text-truncate {{ $t('table.report') }}
+            v-flex(xs12 md9 lg9)
+              span.sub-text.truncated-text-icons {{ $t('table.report') }}
         v-flex(xs6)
           v-row(no-gutters no-wrap justify="space-between" align="center" height="20" @click="scheduleAgain")
-            v-flex(xs3 md2 lg2)
+            v-flex(xs12 md2 lg2)
               v-img( src="../assets/calendar.png" height="20" width="20")
-            v-flex(xs9 md10 lg10)
-              span.sub-text.text-truncate {{ $t('table.scheduleAgain') }}
+            v-flex(xs12 md10 lg10)
+              span.sub-text.truncated-text-icons {{ $t('table.scheduleAgain') }}
 
 </template>
 
@@ -81,11 +81,23 @@ tr.campaign-row
     color: #34476f
   .sub-text
     color: #8593aa
+  .date-col
+    width: 15%
+  .campaign-view-col
+    width: 20%
+  .actions-col
+    width: 40%
+  .campaign-col
+    width: 30%
 #image-text
   .main-text, .sub-text
     position: relative
     top: -0.2rem
-#campaign-date
-  .sub-text
-    font-size: 0.6rem
+
+.truncated-text-icons
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+  display: inherit
+
 </style>
