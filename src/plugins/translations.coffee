@@ -1,10 +1,10 @@
 translations = {
   en:
     table:
-      date: 'Date'
-      campaign: 'Campaign'
-      view: 'View'
-      actions: 'Actions'
+      date: 'DATE'
+      campaign: 'CAMPAGIN'
+      view: 'VIEW'
+      actions: 'ACTIONS'
       ahead: 'ahead'
       ago: 'ago'
       day: 'day'
@@ -20,17 +20,20 @@ translations = {
       close: 'close'
       cancel: 'cancel'
       okay: 'okay'
-    manageCampaignsHeading: 'Manage Campaigns'
+    headings:
+      manageCampaigns: 'Manage Campaigns'
+      pricing: 'Pricing'
     tabs:
       upcomingCampaigns: 'upcoming campaigns'
       liveCampaigns: 'live campaigns'
       pastCampaigns: 'past campaigns'
+    noData: 'No Data'
   de:
     table:
-      date: 'Datum'
-      campaign: 'Kampagne'
-      view: 'Aussicht'
-      actions: 'Aktionen'
+      date: 'DATUM'
+      campaign: 'KAMPANGE'
+      view: 'AUSSICHT'
+      actions: 'AKTIONEN'
       ahead: 'voraus'
       ago: 'vor'
       day: 'tag'
@@ -46,11 +49,14 @@ translations = {
       close: 'schließen'
       cancel: 'stornieren'
       okay: 'okay'
-    manageCampaignsHeading: 'Kampagnen Verwalten'
+    headings:
+      manageCampaigns: 'Kampagnen Verwalten'
+      pricing: 'Preisgestaltung'
     tabs:
       upcomingCampaigns: 'kommende kampagnen'
       liveCampaigns: 'live kampagnen'
       pastCampaigns: 'vergangene kampagnen'
+    noData: 'Keine Daten'
 }
 
 module.exports = { translations }

@@ -1,30 +1,32 @@
 <template lang="pug">
-  v-dialog(persistent v-model="isOpen" max-width="30%" min-width="240px")
+  v-dialog(persistent v-model="isOpen" :width="dialogWidth" v-if="campaign")
     v-card.pa-3
       v-row(no-gutters no-wrap justify="space-between")
-        v-flex(xs6 md3 lg2)
-          v-img(contain src="../assets/real-racing.png" height="100")
-        v-flex.pl-3.pt-7(xs6 md9 lg10)
-          div.main-text.font-weight-medium {{ campaign.name }}
-          div.sub-text {{ campaign.region }}
+        v-flex(xs6 md3 lg3)
+          v-card(height="160" width="160" raised)
+            v-img#campaign-image( v-if="img" :src="require(`../assets/${img}`)" height="160" width="160")
+        v-flex(xs6 md9 lg9)
+          v-col#image-text(no-wrap align="start" justify="end")
+            div.main-text.font-weight-medium.text-truncate {{ campaign.name }}
+            div.sub-text.text-truncate {{ campaign.region }}
 
-        v-flex.py-2(xs12 md12 lg12)
-          h3 Pricing
-
-        v-flex.py-2(xs6 md6 lg5)
-          span {{ oneMonthLabel }}
-        v-flex.py-2(xs6 md6 lg7)
-          span {{ monthlyPrice }}
+        v-flex.py-2.pt-6(xs12 md12 lg12)
+          h3.main-text {{ $t('headings.pricing')}}
 
         v-flex.py-2(xs6 md6 lg5)
-          span {{ sixMonthLabel }}
-        v-flex.py-2(xs6 md6 lg7)
-          span {{ halfYearlyPrice }}
+          span.sub-text {{ oneMonthLabel }}
+        v-flex.py-2(xs6 md6 lg7 text-right)
+          span.price-text.font-weight-medium {{ monthlyPrice }}
 
         v-flex.py-2(xs6 md6 lg5)
-          span {{ oneYearLabel }}
-        v-flex.py-2(xs6 md6 lg7)
-          span {{ yearlyPrice }}
+          span.sub-text {{ sixMonthLabel }}
+        v-flex.py-2(xs6 md6 lg7 text-right)
+          span.price-text.font-weight-medium {{ halfYearlyPrice }}
+
+        v-flex.py-2(xs6 md6 lg5)
+          span.sub-text {{ oneYearLabel }}
+        v-flex.py-2(xs6 md6 lg7 text-right)
+          span.price-text.font-weight-medium {{ yearlyPrice }}
       v-row(no-gutters no-wrap justify="center" align="center")
         v-flex.pt-3(xs6 md3 lg2)
           v-btn( @click="closeDialog" medium text outlined) {{ $t('labels.close') }}
@@ -40,21 +42,37 @@ export default {
       default: false
   computed:
     prices: -> @campaign.price || {}
-    monthlyPrice: -> "$" + @prices['1m']
-    halfYearlyPrice: -> "$" + @prices['6m']
-    yearlyPrice: -> "$" + @prices['1y']
+    currency: -> "$"
+    monthlyPrice: -> @currency + ' ' + @prices['1m']
+    halfYearlyPrice: -> @currency + ' ' + @prices['6m']
+    yearlyPrice: -> @currency + ' ' + @prices['1y']
     oneMonthLabel: -> "1 " + @$t('labels.week') + " - " + "1 " + @$t('labels.month')
     sixMonthLabel: -> "6 " + @$t('labels.month')
     oneYearLabel: -> "1 " + @$t('labels.year')
+    img: -> @campaign.img
+    dialogWidth: ->
+      if @$vuetify.breakpoint.xsOnly
+        "100%"
+      else if @$vuetify.breakpoint.smOnly
+        "60%"
+      else if @$vuetify.breakpoint.mdOnly
+        "50%"
+      else
+        "40%"
 
   methods:
     closeDialog: -> @$emit('close-campaign-modal')
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 .main-text
   color: #34476f
 .sub-text
   color: #8593aa
+.price-text
+  color: #566684
+#image-text
+  position: relative
+  top: 6.5rem
 </style>

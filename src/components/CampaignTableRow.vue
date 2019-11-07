@@ -1,41 +1,45 @@
 <template lang="pug">
-  tr
+  tr.campaign-row
     td
-      div.main-text.font-weight-medium {{ formattedCampaignDate }}
-      div.sub-text {{ campaignDateDiff }}
+      v-col.px-0#campaign-date(not-gutters)
+        div.main-text.text-truncate {{ formattedCampaignDate }}
+        div.sub-text.text-truncate {{ campaignDateDiff }}
     td
-      v-row(no-gutters justify="space-between" align="start")
-        v-flex(xs6)
-          v-img(contain src="../assets/real-racing.png" height="40")
-        v-flex(xs6)
-          div.main-text.font-weight-medium {{campaignRow.name}}
-          div.sub-text {{ campaignRow.region}}
+      v-row(no-gutters no-wrap justify="space-between" align="center")
+        v-flex(xs3 md3 lg2)
+          v-img( :src="require(`../assets/${campaignRow.img}`)" height="40" width="40")
+        v-flex(xs9 md9 lg10)
+          v-col.px-0#image-text(no-gutters no-wrap align="start")
+            v-flex(xs6)
+              div.main-text.text-truncate {{campaignRow.name}}
+            v-flex(xs6)
+              div.sub-text.caption {{ campaignRow.region}}
     td
-      v-row(no-gutters justify="space-around" align="start")
-        v-flex(xs6)
-          v-img(contain src="../assets/Price.png" height="20" @click="viewPricing")
-        v-flex(xs6)
+      v-row(no-gutters no-wrap justify="space-between" align="center")
+        v-flex(xs3 md3 lg2)
+          v-img(src="../assets/Price.png" height="20" width="20" @click="viewPricing")
+        v-flex(xs9 md9 lg10)
           span.sub-text {{ $t('table.viewPricing') }}
     td
-      v-row(no-gutters justify="space-between" align="start")
+      v-row(no-gutters no-wrap justify="space-between" align="center")
         v-flex(xs3)
-          v-row(no-gutters justify="space-around" align="start")
-            v-flex
-              v-img(contain src="../assets/file.png" height="20")
-            v-flex
+          v-row(no-gutters justify="space-between" align="center")
+            v-flex(xs3 md3 lg3)
+              v-img( src="../assets/file.png" height="20" width="15")
+            v-flex(xs9 md9 lg9)
               span.sub-text CSV
         v-flex(xs3)
-          v-row(no-gutters justify="space-around" align="start")
-            v-flex
-              v-img(contain src="../assets/statistics-report.png" height="20")
-            v-flex
-              span.sub-text {{ $t('table.report') }}
+          v-row( no-gutters no-wrap justify="space-between" align="center")
+            v-flex(xs3 md3 lg3)
+              v-img( src="../assets/statistics-report.png" height="20" width="15")
+            v-flex(xs9 md9 lg9)
+              span.sub-text.text-truncate {{ $t('table.report') }}
         v-flex(xs6)
-          v-row(no-gutters justify="space-around" align="start" height="20" @click="scheduleAgain")
-            v-flex
-              v-img(contain src="../assets/calendar.png" height="20")
-            v-flex
-              span.sub-text {{ $t('table.scheduleAgain') }}
+          v-row(no-gutters no-wrap justify="space-between" align="center" height="20" @click="scheduleAgain")
+            v-flex(xs3 md2 lg2)
+              v-img( src="../assets/calendar.png" height="20" width="20")
+            v-flex(xs9 md10 lg10)
+              span.sub-text.text-truncate {{ $t('table.scheduleAgain') }}
 
 </template>
 
@@ -72,9 +76,16 @@ export default {
 </script>
 
 <style lang="stylus">
-tr
+tr.campaign-row
   .main-text
     color: #34476f
   .sub-text
     color: #8593aa
+#image-text
+  .main-text, .sub-text
+    position: relative
+    top: -0.2rem
+#campaign-date
+  .sub-text
+    font-size: 0.6rem
 </style>

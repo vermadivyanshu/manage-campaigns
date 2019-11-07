@@ -1,46 +1,39 @@
 <template lang="pug">
-  v-card.campaign-table
-    v-simple-table
-      template(slot="default")
-        thead
-          tr
-            th(class="text-left") {{ $t('table.date')}}
-            th(class="text-left") {{ $t('table.campaign')}}
-            th(class="text-left") {{ $t('table.view')}}
-            th(class="text-left") {{ $t('table.actions') }}
-        tbody
-          campaign-table-row.pa-3(v-for="campaign, index in campaignsList"
-          :campaignRow="campaign"
-          :key="index"
-          @view-pricing="onViewPricing"
-          @schedule-again="scheduleAgain")
-    campaign-date-picker(
-      :isOpen="isCampaignDatePickerOpen"
-      :campaign="campaignDatePickerItem"
-      @close-date-pciker="closeCampaignDatePicker"
-      @update:campaign-date="updateCampaignDate"
-    )
+  v-card
+    div
+      v-simple-table.campaign-table(fixed-header height="500px" v-if="campaignsList[0]")
+        template(slot="default")
+          thead
+            tr.thead-bg
+              th(class="text-left") {{ $t('table.date')}}
+              th(class="text-left") {{ $t('table.campaign')}}
+              th(class="text-left") {{ $t('table.view')}}
+              th(class="text-left") {{ $t('table.actions') }}
+          tbody
+            campaign-table-row.pa-3(v-for="campaign, index in campaignsList"
+            :campaignRow="campaign"
+            :key="index"
+            @view-pricing="onViewPricing"
+            @schedule-again="scheduleAgain")
+      v-container(fill-height v-else)
+        v-row(no-gutters align="center" justify="center")
+          v-flex(xs6 md3 lg3 text-center)
+            div {{$t('noData')}}
+
 </template>
 
 <script lang="coffee">
 import CampaignTableRow from './CampaignTableRow.vue'
-import CampaignDatePicker from './CampaignDatePicker.vue'
+
 export default {
   props:
     campaignsList:
       type: Array
-  data: ->
-    isCampaignDatePickerOpen: false
-    campaignDatePickerItem: {}
-  components: { CampaignTableRow, CampaignDatePicker }
+
+  components: { CampaignTableRow }
   methods:
     scheduleAgain: (campaign) ->
-      @campaignDatePickerItem = campaign
-      @isCampaignDatePickerOpen = true
-
-    updateCampaignDate: (date) ->
-      @$emit('update-campaign-date-for-record', date, @campaignDatePickerItem)
-      @isCampaignDatePickerOpen = false
+      @$emit('schedule-again-for-campaign', campaign)
 
     onViewPricing: (campaign) ->
       @$emit('open-view-pricing', campaign)
@@ -49,7 +42,10 @@ export default {
 </script>
 
 <style lang="stylus">
-  .campaign-table
-    thead
-      background-color: #f1f1f3
+.campaign-table
+  .thead-bg
+    th.text-left
+      background-color: #f1f1f3 !important
+  overflow-x: scroll
+  height: 500px
 </style>

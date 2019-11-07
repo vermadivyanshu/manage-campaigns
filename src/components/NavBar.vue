@@ -14,9 +14,9 @@
           v-select(
             :items="langs"
             v-model="$i18n.locale"
-            color="#fff"
             light
             width="10"
+            color="#fff"
           )
 </template>
 
@@ -26,3 +26,11 @@ export default
     langs: ['en', 'de']
 
 </script>
+<style lang="stylus">
+.theme--light.v-select
+  .v-select__selections
+    color: white !important
+i.v-icon.notranslate.mdi.mdi-menu-down.theme--light
+  color: white !important
+
+</style>
