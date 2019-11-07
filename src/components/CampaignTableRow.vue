@@ -6,9 +6,9 @@
         div.sub-text.text-truncate {{ campaignDateDiff }}
     td.campaign-col
       v-row(no-gutters no-wrap justify="space-between" align="center")
-        v-flex(xs6 md3 lg2)
-          v-img( :src="require(`../assets/${campaignRow.img}`)" height="40" width="40")
-        v-flex(xs6 md9 lg10)
+        v-flex(xs5 md3 lg2)
+          v-img( :src="require(`../assets/${campaignRow.img}`)" height="40" max-width="40")
+        v-flex(xs7 md9 lg10)
           v-col.px-0#image-text(no-gutters no-wrap align="start")
             v-flex(xs12)
               div.main-text.text-truncate {{campaignRow.name}}

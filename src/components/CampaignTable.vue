@@ -1,7 +1,7 @@
 <template lang="pug">
   v-card
     div
-      v-simple-table.campaign-table(fixed-header height="500px" v-if="campaignsList[0]")
+      v-simple-table.campaign-table(fixed-header scrollable v-if="campaignsList[0]" height="25rem")
         template(slot="default")
           thead
             tr.thead-bg
@@ -47,5 +47,4 @@ export default {
     th.text-left
       background-color: #f1f1f3 !important
   overflow-x: scroll
-  height: 500px
 </style>

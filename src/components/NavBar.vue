@@ -10,13 +10,11 @@
             width="100"
           )
         v-spacer
-        .d-flex.algin-center
+        .d-flex.algin-center.lang-select
           v-select(
             :items="langs"
             v-model="$i18n.locale"
             light
-            width="10"
-            color="#fff"
           )
 </template>
 
@@ -34,5 +32,7 @@ i.v-icon.notranslate.mdi.mdi-menu-down.theme--light
   color: white !important
 .theme--light.v-text-field>.v-input__control>.v-input__slot:before
   border-color: white !important
+.lang-select
+  width: 4rem
 
 </style>
