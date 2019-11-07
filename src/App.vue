@@ -15,3 +15,8 @@ export default {
   components: { MainLayout, NavBar }
 }
 </script>
+
+<style lang="stylus" scoped>
+.v-application
+  background: white !important
+</style>
