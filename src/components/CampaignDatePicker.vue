@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-dialog(persistent v-model="isOpen")
+  v-dialog(persistent v-model="isOpen" :width="dialogWidth")
     v-date-picker(v-model="datePickerModel" scrollable :locale="$i18n.locale")
       v-spacer
       v-btn(text @click="closeDatePicker") {{ $t('labels.cancel')}}
@@ -19,6 +19,16 @@ export default {
     datePickerModel: moment(@campaign?.createdOn).format("YYYY-MM-DD")
   watch:
     campaign: (newVal, oldVal) -> @datePickerModel = moment(newVal?.createdOn).format("YYYY-MM-DD")
+  computed:
+    dialogWidth: ->
+      if @$vuetify.breakpoint.xsOnly
+        "100%"
+      else if @$vuetify.breakpoint.smOnly
+        "60%"
+      else if @$vuetify.breakpoint.mdOnly
+        "50%"
+      else
+        "40%"
 
   methods:
     closeDatePicker: -> @$emit('close-date-pciker')

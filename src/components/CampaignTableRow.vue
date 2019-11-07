@@ -15,9 +15,9 @@
             v-flex(xs6)
               div.sub-text.caption {{ campaignRow.region}}
     td
-      v-row(no-gutters no-wrap justify="space-between" align="center")
+      v-row(no-gutters no-wrap justify="space-between" align="center" @click="viewPricing")
         v-flex(xs3 md3 lg2)
-          v-img(src="../assets/Price.png" height="20" width="20" @click="viewPricing")
+          v-img(src="../assets/Price.png" height="20" width="20")
         v-flex(xs9 md9 lg10)
           span.sub-text {{ $t('table.viewPricing') }}
     td
