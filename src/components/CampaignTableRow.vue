@@ -1,5 +1,5 @@
 <template lang="pug">
-  tr.campaign-row
+  tr(v-if="!isMobile").campaign-row
     td.date-col
       v-col.px-0#campaign-date(not-gutters)
         div.main-text.text-truncate {{ formattedCampaignDate }}
@@ -40,6 +40,53 @@
               v-img( src="../assets/calendar.png" height="20" width="20")
             v-flex(xs12 md10 lg10)
               span.sub-text.truncated-text-icons {{ $t('table.scheduleAgain') }}
+  tr.campaign-row.mobile(v-else)
+    td.pa-2
+      v-row(no-wrap align="center" justify="space-around")
+        v-flex.date-col(xs6)
+          v-col#campaign-date(not-gutters)
+            div.header {{ $t('table.date')}}
+            div.main-text.text-truncate {{ formattedCampaignDate }}
+            div.sub-text.text-truncate {{ campaignDateDiff }}
+        v-flex.campaign-col(xs6)
+          div.header {{ $t('table.campaign')}}
+          v-row(no-gutters no-wrap justify="space-between" align="center")
+            v-flex(xs3 sm2)
+              v-img( :src="require(`../assets/${campaignRow.img}`)" height="40" max-width="40")
+            v-flex(xs9 sm10)
+              v-col.px-0#image-text(no-gutters no-wrap align="start")
+                v-flex(xs12)
+                  div.main-text.text-truncate {{campaignRow.name}}
+                v-flex(xs12)
+                  div.sub-text.caption.text-truncate {{ campaignRow.region}}
+        v-flex.campaign-view-col.pl-3(xs6)
+          div.header.pb-2 {{ $t('table.view')}}
+          v-row(no-gutters no-wrap justify="space-between" align="center" @click="viewPricing")
+            v-flex(xs12)
+              v-img(src="../assets/Price.png" height="20" width="20")
+            v-flex(xs12)
+              span.sub-text.text-truncate {{ $t('table.viewPricing') }}
+        v-flex.campaign-actions-col(xs6)
+          div.header.pb-2 {{ $t('table.actions')}}
+          v-row(no-gutters no-wrap justify="space-between" align="center")
+            v-flex(xs3)
+              v-row(no-gutters justify="space-between" align="center")
+                v-flex(xs12)
+                  v-img( src="../assets/file.png" height="20" width="15")
+                v-flex(xs12)
+                  span.sub-text.truncated-text-icons CSV
+            v-flex(xs3)
+              v-row( no-gutters no-wrap justify="space-between" align="center")
+                v-flex(xs12)
+                  v-img( src="../assets/statistics-report.png" height="20" width="15")
+                v-flex(xs12)
+                  span.sub-text.truncated-text-icons {{ $t('table.report') }}
+            v-flex(xs6)
+              v-row(no-gutters no-wrap justify="space-between" align="center" height="20" @click="scheduleAgain")
+                v-flex(xs12)
+                  v-img( src="../assets/calendar.png" height="20" width="20")
+                v-flex(xs12)
+                  span.sub-text.truncated-text-icons {{ $t('table.scheduleAgain') }}
 
 </template>
 
@@ -66,6 +113,7 @@ export default {
       daysText = if diff > 1 then @$t('table.days') else @$t('table.day')
       "#{diff} #{daysText} #{postfix}"
     imgUrl: -> "../assets/#{@campaignRow.img}"
+    isMobile: -> @$vuetify.breakpoint.smAndDown
   methods:
     viewPricing: ->
       @$emit('view-pricing', @campaignRow)
@@ -89,6 +137,10 @@ tr.campaign-row
     width: 40%
   .campaign-col
     width: 30%
+  &.mobile
+    .header
+      font-weight: bold
+      color: #566684
 #image-text
   .main-text, .sub-text
     position: relative

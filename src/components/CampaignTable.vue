@@ -3,7 +3,7 @@
     div
       v-simple-table.campaign-table(fixed-header scrollable v-if="campaignsList[0]" height="25rem")
         template(slot="default")
-          thead
+          thead(v-if="!isMobile")
             tr.thead-bg
               th(class="text-left") {{ $t('table.date')}}
               th(class="text-left") {{ $t('table.campaign')}}
@@ -31,6 +31,8 @@ export default {
       type: Array
 
   components: { CampaignTableRow }
+  computed:
+    isMobile: -> @$vuetify.breakpoint.smAndDown
   methods:
     scheduleAgain: (campaign) ->
       @$emit('schedule-again-for-campaign', campaign)
@@ -45,6 +47,6 @@ export default {
 .campaign-table
   .thead-bg
     th.text-left
+      color: #566684
       background-color: #f1f1f3 !important
-  overflow-x: scroll
 </style>

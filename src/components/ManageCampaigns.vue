@@ -1,7 +1,7 @@
 <template lang="pug">
   .manage-campaigns
     h1.manage-campaigns-heading.mb-3 {{ $t('headings.manageCampaigns')}}
-    v-tabs(v-model="tab" color="#83a515")
+    v-tabs(v-model="tab" color="#83a515" fixed)
       v-tab(href="#tab-1")
         span {{ $t('tabs.upcomingCampaigns')}}
       v-tab(href="#tab-2")
