@@ -46,9 +46,9 @@ export default {
     prices: -> @campaign.price || {}
     currency: -> if (@$i18n.locale == 'de') then "€" else "$"
     monthlyPrice: ->
-      @currency + ' ' + currencyConvertor(@prices['1m'], @$i18n.locale)
-    halfYearlyPrice: -> @currency + ' ' + currencyConvertor(@prices['6m'], @$i18n.locale)
-    yearlyPrice: -> @currency + ' ' + currencyConvertor(@prices['1y'], @$i18n.locale)
+      @currency + ' ' + currencyConvertor(@prices['1m'], @$i18n.locale).toFixed(2)
+    halfYearlyPrice: -> @currency + ' ' + currencyConvertor(@prices['6m'], @$i18n.locale).toFixed(2)
+    yearlyPrice: -> @currency + ' ' + currencyConvertor(@prices['1y'], @$i18n.locale).toFixed(2)
     oneMonthLabel: -> "1 " + @$t('labels.week') + " - " + "1 " + @$t('labels.month')
     sixMonthLabel: -> "6 " + @$t('labels.month')
     oneYearLabel: -> "1 " + @$t('labels.year')
