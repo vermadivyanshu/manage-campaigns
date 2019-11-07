@@ -28,11 +28,13 @@
         v-flex.py-2(xs6 md6 lg7 text-right)
           span.price-text.font-weight-medium {{ yearlyPrice }}
       v-row(no-gutters no-wrap justify="center" align="center")
-        v-flex.pt-3(xs6 md3 lg2)
-          v-btn( @click="closeDialog" medium text outlined) {{ $t('labels.close') }}
+        v-flex.pt-3(xs6 md4 lg4 text-center)
+          v-btn(@click="closeDialog" medium text outlined) {{ $t('labels.close') }}
 </template>
 
 <script lang="coffee">
+import { currencyConvertor } from '../helpers/currencyConvertor.coffee'
+
 export default {
   props:
     campaign:
@@ -42,10 +44,11 @@ export default {
       default: false
   computed:
     prices: -> @campaign.price || {}
-    currency: -> "$"
-    monthlyPrice: -> @currency + ' ' + @prices['1m']
-    halfYearlyPrice: -> @currency + ' ' + @prices['6m']
-    yearlyPrice: -> @currency + ' ' + @prices['1y']
+    currency: -> if (@$i18n.locale == 'de') then "€" else "$"
+    monthlyPrice: ->
+      @currency + ' ' + currencyConvertor(@prices['1m'], @$i18n.locale)
+    halfYearlyPrice: -> @currency + ' ' + currencyConvertor(@prices['6m'], @$i18n.locale)
+    yearlyPrice: -> @currency + ' ' + currencyConvertor(@prices['1y'], @$i18n.locale)
     oneMonthLabel: -> "1 " + @$t('labels.week') + " - " + "1 " + @$t('labels.month')
     sixMonthLabel: -> "6 " + @$t('labels.month')
     oneYearLabel: -> "1 " + @$t('labels.year')

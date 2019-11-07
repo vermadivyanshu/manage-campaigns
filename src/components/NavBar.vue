@@ -32,5 +32,7 @@ export default
     color: white !important
 i.v-icon.notranslate.mdi.mdi-menu-down.theme--light
   color: white !important
+.theme--light.v-text-field>.v-input__control>.v-input__slot:before
+  border-color: white !important
 
 </style>
